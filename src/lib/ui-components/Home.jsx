@@ -20,12 +20,19 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Home = () => {
+export const Home = () => {
   const classes = useStyles();
-  return (
-    /* Landing Page Bar */
-     <div className={classes.headerStyles}>{cardList[0].foo}</div>
-  );
-};
 
-export default Home;
+
+  const maketestCard = o => {
+
+  return (
+    <Grid item xs={12} sm={4}>
+      <testCard {...o}/>
+    </Grid> 
+    );
+  };
+
+
+
+//export default Home;

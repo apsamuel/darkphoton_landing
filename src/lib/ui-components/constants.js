@@ -1,7 +1,9 @@
-const cardList = [
+export const cardList = [
     {
-        foo: "bar"
+        title: "test",
+        subtitle: "a subtitle",
+        description: "a test card",
+        avatarUrl: "http://link/to/thing/avatar",
+        imageUrl: "http://link/to/thing.jpg"
     }
 ]
-  
-  export default cardList;
