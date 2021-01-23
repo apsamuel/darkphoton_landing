@@ -1,9 +1,9 @@
 import "./App.css";
 
 import { Grid } from "@material-ui/core";
-import Header from "./Header";
+import Header from "./lib/ui-components/Header";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/styles";
 
 const pallette = {
   paper: {
