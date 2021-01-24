@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Grid } from "@material-ui/core";
 import Header from "./lib/ui-components/Header";
-
+import Home from "./lib/ui-components/Home";
 import { makeStyles } from "@material-ui/styles";
 
 const pallette = {
@@ -34,9 +34,10 @@ function App() {
         <Header />
       </Grid>
       <Grid item container spacing={5} className={classes.item}>
-        <Grid item spacing={5} xs={0} sm={2} />
-        <Grid item spacing={5} xs={12} sm={8}>
+        <Grid item xs={1} sm={2} />
+        <Grid item xs={12} sm={8}>
           Content
+          <Home />
         </Grid>
       </Grid>
     </Grid>
