@@ -7,17 +7,19 @@ import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import PolicyIcon from "@material-ui/icons/Policy";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-
+import { withRouter } from "react-router-dom";
 import * as Colors from "@material-ui/core/colors/";
 
 const useStyles = makeStyles({
   root: {
+    borderRadius: "25px",
     width: "100%",
-    backgroundColor: Colors.blueGrey[900].toString()
+    backgroundColor: Colors.purple[700].toString()
   }
 });
 
-export default function Footer() {
+const Footer = () => {
+  //export default function Footer() {
   const classes = useStyles();
   const [value, setValue] = React.useState("recents");
 
@@ -54,4 +56,6 @@ export default function Footer() {
       />
     </BottomNavigation>
   );
-}
+};
+
+export default withRouter(Footer);

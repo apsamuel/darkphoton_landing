@@ -3,10 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  ThemeProvider,
+  responsiveFontSizes
+} from "@material-ui/core/styles";
 import * as Colors from "@material-ui/core/colors/";
 const rootElement = document.getElementById("root");
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   root: {
     flexGrow: 1,
     display: "flex",
@@ -16,7 +20,7 @@ const theme = createMuiTheme({
     backgroundColor: Colors.purple[50].toString()
   },
   pallete: {
-    primary: Colors.purple[50].toString(),
+    primary: Colors.purple[700].toString(),
     secondary: Colors.grey[900].toString()
   },
   typography: {
@@ -62,6 +66,7 @@ const theme = createMuiTheme({
   }
 });
 
+theme = responsiveFontSizes(theme);
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

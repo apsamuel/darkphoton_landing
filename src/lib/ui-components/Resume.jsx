@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -16,23 +17,25 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "center",
     overflow: "hidden",
     flex: 1,
-    backgroundColor: Colors.purple[700].toString(),
-    borderRadius: "25px"
+    // width: "100vh",
+    // height: "100vh",
+    // margin: "100px auto",
+    backgroundColor: Colors.green[700].toString(),
+    borderRadius: "5px",
+    minHeight: "500px"
   },
-  innercontainerStyles: {
-    borderRadius: "25px",
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    flex: 1,
-    flexWrap: "wrap",
-    padding: 3,
-    container: true,
-    item: true,
-    backgroundColor: Colors.blueGrey[900]
+  leftSideStyles: {
+    position: "relative",
+    //minHeight: "75vh",
+    //width: "100px",
+    backgroundColor: "red"
+  },
+  rightSideStyles: {
+    position: "relative",
+    backgroundColor: "blue"
   },
   paperStyles: {
     borderRadius: "15px",
@@ -42,12 +45,12 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     flex: 1,
     height: null,
-    width: "800px",
+    //    width: "800px",
     //    width: '100%',
     container: true,
     item: true,
     elevation: 5,
-    padding: "20px",
+    //  padding: "20px",
     boxShadow: "0 3px 5px 0 rgba(0, 0, 0, 0.3)",
     backgroundColor: Colors.blueGrey[900],
     margin: "10px"
@@ -62,9 +65,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    alignItems: "center",
-    width: "550px",
-    height: "450px"
+    alignItems: "center"
+    //    width: "550px",
+    //    height: "450px"
   },
   gridItemStyles: {
     flex: 1,
@@ -86,45 +89,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Moments = () => {
+const Resume = () => {
   //export default function Moments() {
   const classes = useStyles();
 
   return (
-    <GridList
-      cellHeight={400}
-      spacing={10}
-      className={classes.innercontainerStyles}
-    >
-      {tileData.map((tile) => (
-        <GridListTile
-          key={tile.img}
-          cols={tile.featured ? 2 : 1}
-          rows={tile.featured ? 2 : 1}
-        >
-          <img
-            className={classes.imageStyles}
-            src={tile.img}
-            alt={tile.title}
-          />
-          <GridListTileBar
-            title={tile.title}
-            titlePosition="top"
-            actionIcon={
-              <IconButton
-                aria-label={`star ${tile.title}`}
-                className={classes.iconStyles}
-              >
-                <StarBorderIcon />
-              </IconButton>
-            }
-            actionPosition="left"
-            className={classes.titleBarStyles}
-          />
-        </GridListTile>
-      ))}
-    </GridList>
+    <Grid item container className={classes.root} direction="row" spacing={1}>
+      <Grid item className={classes.leftSideStyles} xs>
+        <Paper>Left Side</Paper>
+      </Grid>
+      <Grid item className={classes.rightSideStyles} xs={10}>
+        <Paper>Right Side</Paper>
+      </Grid>
+    </Grid>
   );
 };
 
-export default withRouter(Moments);
+export default withRouter(Resume);

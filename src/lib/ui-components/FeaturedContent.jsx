@@ -13,6 +13,7 @@ import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import * as Colors from "@material-ui/core/colors/";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
     flex: 1
   },
   innercontainerStyles: {
-    borderRadius: "25px",
+    borderRadius: "15px",
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
     flex: 1,
     flexWrap: "wrap",
-    padding: 3,
+    padding: 1,
     container: true,
     item: true,
     backgroundColor: Colors.purple[700].toString()
@@ -41,16 +42,16 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     flex: 1,
-    height: '423px',
-    width: '500px',
+    //height: null,
+    //width: "800px",
     //    width: '100%',
     container: true,
     item: true,
     elevation: 5,
-    padding: "20px",
+    padding: "10px",
     boxShadow: "0 3px 5px 0 rgba(0, 0, 0, 0.3)",
-    backgroundColor: Colors.blueGrey[900],
-    margin: "10px"
+    backgroundColor: Colors.purple[700]
+    //margin: "5px"
   },
   button: {
     backgroundColor: "blue",
@@ -60,21 +61,14 @@ const useStyles = makeStyles((theme) => ({
   },
   gridStyles: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center"
+    flexWrap: "wrap"
   },
   gridItemStyles: {
     flex: 1,
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10
+    flexWrap: "wrap"
   },
   gridspaceStyles: {
-    height: 100,
-    width: "80%",
     flex: 1,
     flexWrap: "wrap"
   },
@@ -89,8 +83,9 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     height: 400,
     maxWidth: 1200,
-    boxShadow: "0 15px 15px 0 rgba(0, 0, 0, 0.9)",
-    backgroundColor: Colors.grey[900].toString()
+    boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.9)",
+    backgroundColor: Colors.grey[900].toString(),
+    borderRadius: "25px"
   },
   typographyStyles: {
     flex: 1,
@@ -103,65 +98,47 @@ const FeaturedContent = () => {
   const classes = useStyles();
   //create gridItems (cards) from constants data
   const gridItems = cardList.map((item, index) => (
-    <div classes={classes.root}>
-      <Paper
-        className={classes.paperStyles}
-        key={index}
-        style={{ flex: 1 }}
-        elevation={5}
-      >
-        <Grid container className={classes.innercontainerStyles} spacing={5}>
-          <Grid
-            item
-            className={classes.gridItemStyles}
-            key={index}
-            xs={12}
-            sm={12}
-            xl={12}
-          >
-            <Card className={classes.cardStyles}>
-              <CardHeader
-                avatar={<Avatar src={item.avatarURL} />}
-                action={
-                  <IconButton aria-label="settings">
-                    <ShareIcon />
-                  </IconButton>
-                }
-                title={item.title}
-                subheader={item.subtitle}
-              />
-              <CardMedia
-                component="img"
-                style={{ height: "250px" }}
-                image={item.imageURL}
-              />
-              <CardContent>
-                <Typography
-                  className={classes.typographyStyles}
-                  variant="body2"
-                  component="p"
-                >
-                  {item.description}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Boom</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
+    <Grid item className={classes.gridItemStyles} key={index}>
+      <Paper className={classes.paperStyles}>
+        <Card className={classes.cardStyles}>
+          <CardHeader
+            avatar={<Avatar src={item.avatar} />}
+            action={
+              <IconButton aria-label="settings">
+                <ShareIcon />
+              </IconButton>
+            }
+            title={item.title}
+            subheader={item.subtitle}
+          />
+          <CardMedia
+            component={item.component}
+            style={{ height: "250px" }}
+            src={item.src}
+          />
+          <CardContent>
+            <Typography
+              className={classes.typographyStyles}
+              variant="body2"
+              component="p"
+            >
+              {item.description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Boom</Button>
+          </CardActions>
+        </Card>
       </Paper>
-    </div>
+    </Grid>
   ));
 
   return (
     <Grid
       container
       className={classes.gridStyles}
-      direction="row-reverse"
-      justify="flex-start"
-      alignItems="center"
-      spacing={2}
+      direction="column"
+      spacing={4}
     >
       <Grid item xs={12} sm={12}></Grid>
       {gridItems}
@@ -170,4 +147,4 @@ const FeaturedContent = () => {
   );
 };
 
-export default FeaturedContent;
+export default withRouter(FeaturedContent);

@@ -4,10 +4,14 @@ import IconButton from "@material-ui/core/IconButton";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import InputBase from "@material-ui/core/InputBase";
-import MenuIcon from "@material-ui/icons/Menu";
+import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import * as Colors from "@material-ui/core/colors/";
 import Paper from "@material-ui/core/Paper";
+
+//import { MemoryRouter as Router } from "react-router";
+import { withRouter, Link as RouterLink } from "react-router-dom";
+//import { Link as RouterLink } from "react-router-dom";
 
 //console.log('hello')
 
@@ -75,100 +79,118 @@ const useStyles = makeStyles((theme) => ({
   headerStyles: {
     backgroundColor: Colors.purple[700].toString(),
     width: "100%",
-    height: "70px"
+    height: "70px",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    borderRadius: "25px"
   }
 }));
 
 const Header = () => {
   const classes = useStyles();
+
+  const HomeLinkBehaviour = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} to="/" {...props} />
+  ));
+
+  const ServicesLinkBehaviour = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} to="/services" {...props} />
+  ));
+
+  const MomentsLinkBehaviour = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} to="/moments" {...props} />
+  ));
+
+  const ResumeLinkBehaviour = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} to="/resume" {...props} />
+  ));
+
+  const DaButterzLinkBehaviour = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} to="/dabuttaz" {...props} />
+  ));
+
   return (
     /* Landing Page Bar */
-    <div className={classes.root}>
-      <Paper elevation={5}>
-        <AppBar position="static" className={classes.headerStyles}>
-          <Toolbar>
-            {/*  Icon Button TODO: make drawer */}
-            <IconButton
-              edge="start"
-              className={classes.menuButtonStyles}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
+    <AppBar position="static" className={classes.headerStyles}>
+      <Toolbar>
+        {/*  Icon Button TODO: make drawer */}
+        <IconButton
+          edge="start"
+          className={classes.menuButtonStyles}
+          color="inherit"
+          aria-label="open drawer"
+          component={HomeLinkBehaviour}
+          to="/"
+        >
+          <HomeIcon />
+        </IconButton>
 
-            {/*  Search Input  Div */}
-            <div className={classes.searchStyles}>
-              <div className={classes.searchIconStyles}>
-                <SearchIcon />
-              </div>
+        {/*  Search Input  Div */}
+        <div className={classes.searchStyles}>
+          <div className={classes.searchIconStyles}>
+            <SearchIcon />
+          </div>
 
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRootStyles,
-                  input: classes.inputInputStyles
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRootStyles,
+              input: classes.inputInputStyles
+            }}
+            inputProps={{ "aria-label": "search" }}
+          />
+        </div>
 
-            {/*  Page Title Div */}
-            <div style={{ flex: 1 }}>
-              <Typography className={classes.titleStyles}>
-                Dark Photon Consulation LLC {"\u00AE"}
-              </Typography>
-            </div>
+        {/*  Page Title Div */}
+        <div style={{ flex: 1 }}>
+          <Typography className={classes.titleStyles}>
+            Dark Photon Consultation LLC {"\u00AE"}
+          </Typography>
+        </div>
 
-            <div className={classes.buttonStyles}>
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  alert("clicked");
-                }}
-              >
-                <Typography className={classes.buttonTextStyles}>
-                  Services
-                </Typography>
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  alert("clicked");
-                }}
-              >
-                <Typography className={classes.buttonTextStyles}>
-                  Moments
-                </Typography>
-              </Button>
+        <div className={classes.buttonStyles}>
+          <Button
+            variant="outlined"
+            component={ServicesLinkBehaviour}
+            to="/services"
+          >
+            <Typography className={classes.buttonTextStyles}>
+              Services
+            </Typography>
+          </Button>
 
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  alert("clicked");
-                }}
-              >
-                <Typography className={classes.buttonTextStyles}>
-                  Résumé
-                </Typography>
-              </Button>
+          <Button
+            variant="outlined"
+            component={MomentsLinkBehaviour}
+            to="/moments"
+          >
+            <Typography className={classes.buttonTextStyles}>
+              Moments
+            </Typography>
+          </Button>
 
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  alert("clicked");
-                }}
-              >
-                <Typography className={classes.buttonTextStyles}>
-                  Da Butterz
-                </Typography>
-              </Button>
-            </div>
-          </Toolbar>
-        </AppBar>
-      </Paper>
-    </div>
+          <Button
+            variant="outlined"
+            component={ResumeLinkBehaviour}
+            to="/resume"
+          >
+            <Typography className={classes.buttonTextStyles}>Résumé</Typography>
+          </Button>
+
+          <Button
+            variant="outlined"
+            component={DaButterzLinkBehaviour}
+            to="/dabuttaz"
+          >
+            <Typography className={classes.buttonTextStyles}>
+              Da Butterz
+            </Typography>
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 
-export default Header;
+export default withRouter(Header);
