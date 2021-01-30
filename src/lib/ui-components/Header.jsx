@@ -7,8 +7,8 @@ import InputBase from "@material-ui/core/InputBase";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import * as Colors from "@material-ui/core/colors/";
-import Paper from "@material-ui/core/Paper";
-
+//import Paper from "@material-ui/core/Paper";
+//import CssBaseLine
 //import { MemoryRouter as Router } from "react-router";
 import { withRouter, Link as RouterLink } from "react-router-dom";
 //import { Link as RouterLink } from "react-router-dom";
@@ -67,23 +67,30 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   buttonStyles: {
-    color: "inherit"
+    color: "inherit",
+    display: "flex",
+    flexDirection: "row",
+    flex: 1,
+    flexGrow: 1,
+    flexShring: 1
   },
   buttonTextStyles: {
     color: "rgb(255,255,255)",
-    fontSize: 12
+    fontSize: 12,
+    display: "flex"
   },
   typographyStyles: {
     flex: 1
   },
   headerStyles: {
     backgroundColor: Colors.purple[700].toString(),
-    width: "100%",
-    height: "70px",
+    //width: "100%",
+    height: "65px",
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    borderRadius: "25px"
+    borderRadius: "25px",
+    zIndex: theme.zIndex.appBar + 1
   }
 }));
 
@@ -112,7 +119,7 @@ const Header = () => {
 
   return (
     /* Landing Page Bar */
-    <AppBar position="static" className={classes.headerStyles}>
+    <AppBar className={classes.headerStyles}>
       <Toolbar>
         {/*  Icon Button TODO: make drawer */}
         <IconButton
@@ -143,8 +150,8 @@ const Header = () => {
         </div>
 
         {/*  Page Title Div */}
-        <div style={{ flex: 1 }}>
-          <Typography className={classes.titleStyles}>
+        <div className={classes.titleStyles}>
+          <Typography variant="h6">
             Dark Photon Consultation LLC {"\u00AE"}
           </Typography>
         </div>

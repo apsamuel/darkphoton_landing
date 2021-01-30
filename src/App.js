@@ -1,75 +1,102 @@
+import React from "react";
 import "./App.css";
 import * as Colors from "@material-ui/core/colors/";
-import { Grid } from "@material-ui/core";
+//import { Grid } from "@material-ui/core";
 import Header from "./lib/ui-components/Header";
 import Footer from "./lib/ui-components/Footer";
 import FeaturedContent from "./lib/ui-components/FeaturedContent";
 import Moments from "./lib/ui-components/Moments";
 import Resume from "./lib/ui-components/Resume";
 //import CardPlay from "./lib/ui-components/CardPlay";
-
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: "black"
+    //flexWrap: "wrap",
+    //justifyContent: "space-around",
+    //overflow: "hidden",
+    backgroundColor: "#212121"
   },
+  body: {},
   pageStyles: {
     //backgroundColor: "black",
     display: "flex",
-    flex: "auto"
+    flex: 2,
+    flexDirection: "column",
+    minHeight: "100vh",
+    minWidth: "100vh",
+    //flexWrap: "wrap",
+    backgroundColor: "#212121"
   },
   containerStyles: {
-    backgroundColor: Colors.grey[900].toString(),
-    display: "flex",
-    flex: "auto",
+    backgroundColor: Colors.grey[900].toString()
+    //display: "flex"
+    //flex: 3
+    //width: `calc(100% - 240px)`
     //    width: "100vw",
-    //    height: "100vh",
-    spacing: 0,
-    justify: "space-around"
+    //height: "100vh",
   },
   containerHeaderStyles: {
     backgroundColor: Colors.grey[900].toString(),
-    padding: 1,
+    //padding: 1,
     display: "flex",
-    flex: "auto",
+    flex: 1,
+    flexDirection: "row",
+    //flex: "auto",
     border: "1px solid black",
-    position: "relative",
+    //position: "relative",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "25px"
+    borderRadius: "15px",
+    minWidth: "100vh"
+    //minHeight: "8vh",
+    //maxHeight: "8vh"
+    //minWidth: "`calc(100vh - 240px)`" //
     // height: "10vh",
     // width: "100%"
     //    height: "100vh",
   },
   containerFooterStyles: {
     backgroundColor: Colors.grey[900].toString(),
-    padding: 1,
+    //padding: 1,
     display: "flex",
-    flex: "auto",
+    flex: 1,
+    //flexGrow: 1,
+    //flexShrink: 1,
+    flexDirection: "column",
     border: "1px solid black",
     position: "relative",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "25px"
+    borderRadius: "15px",
+    //minHeight: "8vh",
+    //maxHeight: "8vh",
+    minWidth: "100vh"
     //height: "10vh"
   },
   containerContentStyles: {
-    padding: 5,
-    margin: 1,
+    padding: 0,
+    margin: 0,
     display: "flex",
-    flex: 1,
+    flex: 3,
+    flexGrow: 3,
+    flexShrink: 3,
+    flexDirection: "column",
+    //flexGrow: 3,
+    //flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    minHeight: "85vh",
+    //maxHeight: "85vh",
     // border: "5px solid black",
     backgroundColor: Colors.grey[900].toString(),
     position: "relative",
-    borderRadius: "25px"
+    borderRadius: "15px",
+    minWidth: "100vh"
+
     //    height: "100px",
     //    width: "500px"
   }
@@ -107,71 +134,58 @@ function App() {
   return (
     <Router>
       {/* All content is rendered within this container */}
+
+      <CssBaseline />
+
+      {/*  Header Content is rendered within this nested container item  */}
+
+      {/* Primary Content is rendered within this nested container component in rows */}
+
+      {/*  Main Content is routed by Router within this nested container component item */}
       <div className={classes.pageStyles}>
-        <Grid
-          container
-          spacing={3}
-          className={classes.containerStyles}
-          direction="row"
-        >
-          {/*  Header Content is rendered within this nested container item  */}
-          <Grid item container className={classes.containerHeaderStyles}>
-            <Grid item xs sm lg md xl>
-              <Header />
-            </Grid>
-          </Grid>
+        <div className={classes.containerHeaderStyles}>
+          <Header />
+        </div>
+        <div className={classes.containerContentStyles}>
+          <Switch>
+            <Route exact path="/">
+              <FeaturedContent />
+            </Route>
+          </Switch>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+          </Switch>
+          <Switch>
+            <Route path="/services">
+              <Services />
+            </Route>
+          </Switch>
+          <Switch>
+            <Route path="/moments">
+              <Moments />
+            </Route>
+          </Switch>
+          <Switch>
+            <Route path="/resume">
+              <Resume />
+            </Route>
+          </Switch>
+          <Switch>
+            <Route path="/dabuttaz">
+              <DaButterz />
+            </Route>
+          </Switch>
+        </div>
 
-          {/* Primary Content is rendered within this nested container component in rows */}
-          <Grid
-            item
-            container
-            spacing={12}
-            direction="row"
-            className={classes.containerContentStyles}
-          >
-            {/*  Main Content is routed by Router within this nested container component item */}
-            <Grid item xs={10} sm={10} lg={10} md={10} xl={10}>
-              <Switch>
-                <Route exact path="/">
-                  <FeaturedContent />
-                </Route>
-              </Switch>
-              <Switch>
-                <Route path="/about">
-                  <About />
-                </Route>
-              </Switch>
-              <Switch>
-                <Route path="/services">
-                  <Services />
-                </Route>
-              </Switch>
-              <Switch>
-                <Route path="/moments">
-                  <Moments />
-                </Route>
-              </Switch>
-              <Switch>
-                <Route path="/resume">
-                  <Resume />
-                </Route>
-              </Switch>
-              <Switch>
-                <Route path="/dabuttaz">
-                  <DaButterz />
-                </Route>
-              </Switch>
-            </Grid>
-          </Grid>
-          {/* end Primary Content  */}
+        {/* end Primary Content  */}
 
-          {/* Footer Content is rendered within the main container item */}
-          <Grid item container className={classes.containerFooterStyles}>
-            <Grid item xs>
-              <Footer />
-            </Grid>
-          </Grid>
-        </Grid>
+        {/* Footer Content is rendered within the main container item */}
+
+        <div className={classes.containerFooterStyles}>
+          <Footer />
+        </div>
       </div>
     </Router>
   );
