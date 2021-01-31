@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   pageStyles: {
     //backgroundColor: "black",
     display: "flex",
-    flex: 2,
+    //flex: 2,
     flexDirection: "column",
     minHeight: "100vh",
     minWidth: "100vh",
@@ -32,12 +32,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#212121"
   },
   containerStyles: {
-    backgroundColor: Colors.grey[900].toString()
-    //display: "flex"
-    //flex: 3
-    //width: `calc(100% - 240px)`
-    //    width: "100vw",
-    //height: "100vh",
+    backgroundColor: Colors.grey[900].toString(), 
+
   },
   containerHeaderStyles: {
     backgroundColor: Colors.grey[900].toString(),
@@ -46,47 +42,30 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     flexDirection: "row",
     //flex: "auto",
-    border: "1px solid black",
+    //border: "1px solid black",
     //position: "relative",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "15px",
-    minWidth: "100vh"
-    //minHeight: "8vh",
+    minWidth: "100vh",
+    minHeight: "10vh",
     //maxHeight: "8vh"
     //minWidth: "`calc(100vh - 240px)`" //
     // height: "10vh",
     // width: "100%"
     //    height: "100vh",
   },
-  containerFooterStyles: {
-    backgroundColor: Colors.grey[900].toString(),
-    //padding: 1,
-    display: "flex",
-    flex: 1,
-    //flexGrow: 1,
-    //flexShrink: 1,
-    flexDirection: "column",
-    border: "1px solid black",
-    position: "relative",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: "15px",
-    //minHeight: "8vh",
-    //maxHeight: "8vh",
-    minWidth: "100vh"
-    //height: "10vh"
-  },
   containerContentStyles: {
     padding: 0,
     margin: 0,
     display: "flex",
-    flex: 3,
-    flexGrow: 3,
-    flexShrink: 3,
-    flexDirection: "column",
+    //flex: 3,
     //flexGrow: 3,
-    //flex: 1,
+    //flexShrink: 3,
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    //flexGrow: 3,
+    //flex: 2,
     alignItems: "center",
     justifyContent: "center",
     minHeight: "85vh",
@@ -99,7 +78,24 @@ const useStyles = makeStyles((theme) => ({
 
     //    height: "100px",
     //    width: "500px"
-  }
+  },
+  containerFooterStyles: {
+    backgroundColor: Colors.grey[900].toString(),
+    //padding: 1,
+    display: "flex",
+    flex: 3,
+    //flexGrow: 1,
+    //flexShrink: 1,
+    flexDirection: "column",
+    border: "1px solid black",
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "15px",
+    minHeight: "10vh",
+    minWidth: "100vh"
+
+  },
 }));
 
 //console.log(theme.palette.background.paper)
@@ -143,7 +139,7 @@ function App() {
 
       {/*  Main Content is routed by Router within this nested container component item */}
       <div className={classes.pageStyles}>
-        <div className={classes.containerHeaderStyles}>
+      <div className={classes.containerHeaderStyles}>
           <Header />
         </div>
         <div className={classes.containerContentStyles}>

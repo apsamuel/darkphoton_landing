@@ -17,41 +17,31 @@ import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: "75px",
+    marginBottom: "65px",
+    marginLeft: "5px",
+    marginRight: "5px",
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    flex: 1
-  },
-  innercontainerStyles: {
-    borderRadius: "15px",
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    flex: 1,
-    flexWrap: "wrap",
-    padding: 1,
-    container: true,
-    item: true,
-    backgroundColor: Colors.purple[700].toString()
+    flexWrap: "nowrap",
+    //flexDirection: "inherit",
+    //justifyContent: "space-around",
+    //overflow: "hidden",
+    position: "relative"
   },
   paperStyles: {
-    borderRadius: "15px",
+    borderRadius: "25px",
+    position: "relative",
     justifyContent: "center",
     alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    flex: 1,
-    //height: null,
-    //width: "800px",
-    //    width: '100%',
-    container: true,
-    item: true,
-    elevation: 5,
-    padding: "10px",
+    //display: "flex",
+    //flexWrap: "nowrap",
+    //flexDirection: "inherit",
+    //flex: "auto",
+    //elevation: 5,
+    padding: "5px",
     boxShadow: "0 3px 5px 0 rgba(0, 0, 0, 0.3)",
     backgroundColor: Colors.purple[700]
-    //margin: "5px"
+
   },
   button: {
     backgroundColor: "blue",
@@ -61,26 +51,32 @@ const useStyles = makeStyles((theme) => ({
   },
   gridStyles: {
     display: "flex",
-    flexWrap: "wrap"
+    flex: "auto",
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    //position: "absolute",
   },
   gridItemStyles: {
     flex: 1,
+    //flexGrow: 1,
+    //flexShrink: 1,
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "nowrap"
   },
   gridspaceStyles: {
-    flex: 1,
+    flexGrow: 1,
     flexWrap: "wrap"
   },
   cardStyles: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: "inline-table",
+    //flexWrap: "nowrap",
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    padding: 5,
-    flex: 1,
-    width: 500,
+
+    //padding: 5,
+    flex: "auto",
+    width: 600,
     height: 400,
     maxWidth: 1200,
     boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.9)",
@@ -98,8 +94,8 @@ const FeaturedContent = () => {
   const classes = useStyles();
   //create gridItems (cards) from constants data
   const gridItems = cardList.map((item, index) => (
-    <Grid item className={classes.gridItemStyles} key={index}>
-      <Paper className={classes.paperStyles}>
+    <Grid item className={classes.gridItemStyles}  key={index} xs={12}>
+      <Paper className={classes.paperStyles} >
         <Card className={classes.cardStyles}>
           <CardHeader
             avatar={<Avatar src={item.avatar} />}
@@ -134,16 +130,19 @@ const FeaturedContent = () => {
   ));
 
   return (
+    <div className={classes.root}>
     <Grid
       container
       className={classes.gridStyles}
-      direction="column"
-      spacing={4}
+      direction="row"
+      spacing={10}
+ 
     >
-      <Grid item xs={12} sm={12}></Grid>
+      {/* <Grid item xs={12} sm={12}></Grid> */}
       {gridItems}
-      <Grid item xs={12} sm={12}></Grid>
+      {/* <Grid item xs={12} sm={12}></Grid> */}
     </Grid>
+    </div>
   );
 };
 

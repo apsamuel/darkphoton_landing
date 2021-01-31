@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     flex: 1,
     flexGrow: 1,
-    flexShring: 1
+    flexShrink: 1
   },
   buttonTextStyles: {
     color: "rgb(255,255,255)",
@@ -85,12 +85,13 @@ const useStyles = makeStyles((theme) => ({
   headerStyles: {
     backgroundColor: Colors.purple[700].toString(),
     //width: "100%",
-    height: "65px",
+    //height: "65px",
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    borderRadius: "25px",
-    zIndex: theme.zIndex.appBar + 1
+    borderRadius: "15px",
+    margin: "5px",
+    zIndex: `calc(${theme.zIndex.appBar} + 1)`
   }
 }));
 
@@ -120,7 +121,7 @@ const Header = () => {
   return (
     /* Landing Page Bar */
     <AppBar className={classes.headerStyles}>
-      <Toolbar>
+      <Toolbar position="sticky">
         {/*  Icon Button TODO: make drawer */}
         <IconButton
           edge="start"

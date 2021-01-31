@@ -2,10 +2,12 @@ import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { CardMedia } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 //import Paper from "@material-ui/core/Paper";
-
+import { resumeData } from "./constants"; 
 import IMG_0308_crop from "./images/IMG_0308_crop.jpg";
 import DSCN0861 from "./images/DSCN0861.jpeg";
+import DSCN0670 from "./images/DSCN0670.jpeg";
 import * as Colors from "@material-ui/core/colors/";
 import {
   withRouter,
@@ -13,10 +15,26 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import Collapse from '@material-ui/core/Collapse';
+import Popover from '@material-ui/core/Popover';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+//import Avatar from '@material-ui/core/Avatar';
+
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
+//import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -24,16 +42,15 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+//import ListItem from "@material-ui/core/ListItem";
+//import ListItemIcon from "@material-ui/core/ListItemIcon";
+//import ListItemText from "@material-ui/core/ListItemText";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardActions from "@material-ui/core/CardActions";
+//import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import WorkIcon from "@material-ui/icons/Work";
-
 import InfoIcon from "@material-ui/icons/Info";
 import SchoolIcon from "@material-ui/icons/School";
 import ReplayIcon from "@material-ui/icons/Replay";
@@ -58,18 +75,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     top: `calc(${appBarHeight}px + 20px)`,
+    bottom: `calc(${footerHeight}px + 10px)`,
     //flexWrap: "nowrap",
     flexDirection: "row",
     //justifyContent: "space-between",
     alignItems: "center",
     justifyContent: "center",
     //overflow: "hidden",
-    position: "absolute",
+    position: "sticky",
     //minHeight: "75vh",
-    minWidth: "75vw",
-    minHeight: `calc(50vh -  ${appBarHeight}px + ${footerHeight}px)`,
-    flex: 3,
-    backgroundColor: Colors.yellow[700].toString(),
+    //minWidth: "75vw",
+    minWidth: "65vw",
+    minHeight: "75vh",
+    //flex: 3,
+    backgroundColor: Colors.purple[700].toString(),
     borderRadius: "5px"
     //minHeight: "500px"
   },
@@ -82,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentContainer: {
     overflow: "auto",
-    flexGrow: 1,
+    //flexGrow: 1,
     borderRadius: "15px",
     //left: "80px",
     top: `calc(20px + ${appBarHeight}px)`,
@@ -94,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     //marginLeft: `calc(${drawerWidth}px + 20)`,
     width: `calc(100vh - ${drawerWidth}px)`,
     flexDirection: "row",
-    position: "absolute",
+    //position: "absolute",
     backgroundColor: Colors.grey[700],
     alignItems: "center"
   },
@@ -103,6 +122,10 @@ const useStyles = makeStyles((theme) => ({
     height: appBarHeight,
     zIndex: theme.zIndex.drawer + 1,
     position: "absolute",
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
     backgroundColor: Colors.grey[800]
     //color: "black"
   },
@@ -125,15 +148,17 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     flexGrow: 3,
     //height: "50%",
-    left: "0"
+    whiteSpace: "nowrap",
+    left: "0",
+    position: "relative"
   },
   drawerPaper: {
-    position: "absolute",
+    //position: "absolute",
     width: drawerWidth,
     maxHeight: "40vh"
   },
   drawerOpen: {
-    //position: "relative",
+    position: "relative",
     //minHeight: "75vh",
     //left: "25px",
     width: drawerWidth,
@@ -187,12 +212,17 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    position: "absolute",
+    //position: "absolute",
+    marginTop: `${appBarHeight}px`,
     flexGrow: 3,
     flexDirection: "row",
     flexShrink: 0,
     padding: theme.spacing(3)
     //backgroundColor: "black"
+  },
+  avatarStyles: {
+    width: theme.spacing(9),
+    height: theme.spacing(9)
   },
   cardStyles: {
     display: "flex",
@@ -214,14 +244,52 @@ const useStyles = makeStyles((theme) => ({
   imgStyles: {
     height: "450px",
     width: "450px"
-  }
+  },
+  accordianItem: {
+    backgroundColor: Colors.grey[900].toString(),
+    color: "white",
+    width: "100%",
+    borderRadius: "15px",
+  },
+  accordianPrimaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "33.33%",
+    flexShring: 0,
+  },
+  accordianSecondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  accordianSet: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    //backgroundColor: Colors.grey[900].toString(),
+    //position: "absolute",
+    marginTop: `${appBarHeight}px`,
+    borderRadius: "5px",
+    flexGrow: 3,
+    //flexDirection: "row",
+    flexShrink: 0,
+    padding: theme.spacing(3)
+  },
+  popover: {
+    pointerEvents: 'none',
+  },
+  paper: {
+    padding: theme.spacing(1),
+  },
 }));
 
+console.log('halp')
 const Resume = () => {
   //export default function Moments() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
 
   const ResumeHomeLinkBehaviour = React.forwardRef((props, ref) => (
     <RouterLink ref={ref} to="/resume" {...props} />
@@ -231,6 +299,97 @@ const Resume = () => {
     <RouterLink ref={ref} to="/resume/info" {...props} />
   ));
 
+  const ResumeWorkHistoryLinkBehaviour = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} to="/resume/workinfo" {...props} />
+  ));
+
+
+  function JobHistory() {
+    const [expanded, setExpanded] = React.useState(false);
+
+    // setup popover logic
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handlePopoverOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handlePopoverClose = () => {
+      setAnchorEl(null);
+    };
+    const open = Boolean(anchorEl); 
+
+    // end popover logic 
+
+    //const [open, setOpen] = React.useState(true);
+    const handleChange = (panel) => (_event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+    };  
+
+    const JobHistoryItems = resumeData.workhistory.map((item, index) => (
+      <div className={classes.accordianItem} key={index}> 
+        {console.log("From within Job History items and on item: " + item.company)}
+        {console.log("testing panel" + index.toString())}
+        <Accordion className={classes.accordianItem}>
+          <AccordionSummary expandIcon={<div> <Avatar  className={classes.avatarStyles} alt={item.company} src={item.companyAvatar}  /> </div>} id={expanded === "panel"+index.toString()} onChange={handleChange("panel"+index.toString())}>
+            {/* <Avatar className={classes.avatarStyles} alt={item.company} src={item.companyAvatar}  /> */}
+            <div style={{display: "inline-flex",flexDirection: "row", flex: 3}}>
+            <Typography 
+              className={classes.accordianPrimaryHeading} 
+              aria-owns={open ? 'mouse-over-popover' : undefined} 
+              aria-haspopup="true" 
+              onMouseEnter={handlePopoverOpen} 
+              onMouseLeave={handlePopoverClose}
+            >
+              {item.company}
+            </Typography>
+            <Popover 
+              id="mouse-over-popover" 
+              className={classes.popover}
+              classes={{paper: classes.paper}}
+              open={open}
+              anchorEl={anchorEl}
+              anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+              transformOrigin={{vertical: 'top', horizontal: 'left'}}
+              onClose={handlePopoverClose}
+              disableRestoreFocus
+            >
+              <Typography>{item.title}</Typography>
+              {console.log(item)}
+            </Popover>
+            </div>
+            <Typography className={classes.accordianSecondaryHeading}>
+              {item.companyDescription} ({item.startDate} - {item.endDate})
+            </Typography>
+
+          
+          </AccordionSummary>
+          <AccordionDetails>
+            <List>
+            {
+              item.bullets.map((item, index) => (
+                <ListItem key={index}>
+                <ListItemText  primary={item} />
+                </ListItem>
+              ))
+            }
+            </List>
+
+          </AccordionDetails>
+        </Accordion>
+
+       </div>
+    ));
+
+    console.log('Job History: ' + JobHistoryItems)
+    ///const JobHistoryItems = return(<div>Halp</div>)
+    //console.log(JobHistoryItems)
+    return (
+        <div className={classes.accordianSet} style={{flexDirection: "column"}}>
+        {JobHistoryItems}
+        </div>
+    )
+  }
   function AboutMe() {
     return (
       <div className={classes.dynamic}>
@@ -238,7 +397,7 @@ const Resume = () => {
           <CardHeader
             title="IT Solutions Consulant"
             subheader="DevOps Engineer specializing in Containerized & Cloud Infrastructures"
-            avatar={<Avatar src={DSCN0861} />}
+            avatar={<Avatar src={DSCN0670} />}
           />
           <CardMedia
             component="img"
@@ -257,7 +416,7 @@ const Resume = () => {
 
   function Test() {
     return (
-      <div className={classes.test}>
+      <div className={classes.dynamic}>
         <Paper
           style={{
             flex: 1,
@@ -295,7 +454,6 @@ const Resume = () => {
     <div className={classes.root}>
       <CssBaseline />
       {/* Tool Bar to left */}
-      DRAWER Container
       <AppBar
         id="resumeAppBar"
         className={clsx(classes.appBar, {
@@ -354,7 +512,11 @@ const Resume = () => {
             </ListItemIcon>
             <ListItemText primary="About Me" />
           </ListItem>
-          <ListItem button>
+          <ListItem 
+            button
+            component={ResumeWorkHistoryLinkBehaviour}
+            to="/resume/workinfo"
+          >
             <ListItemIcon>
               <WorkIcon />
             </ListItemIcon>
@@ -389,6 +551,9 @@ const Resume = () => {
           </Route>
           <Route path="/resume/info">
             <AboutMe />
+          </Route>
+          <Route path="/resume/workinfo">
+            <JobHistory/>
           </Route>
         </Switch>
       </div>
