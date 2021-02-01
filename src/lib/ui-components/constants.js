@@ -56,6 +56,10 @@ export const tileData = [
   }
 ];
 
+export const skillData = {
+  linux: "Approximately 15 years experience with provisioning & maintaining linux kernel based distributions (RHEL/Centos, Debian/Ubuntu)",
+  unix: "Approximately 15 years experience with provisioning & maintaing unix kernel based distributions (Solaris, AIX, HP-UX)"
+}
 export const resumeData = {
   name: "Aaron Peter Samuel",
   email: "aaron.psamuel@gmail.com",
