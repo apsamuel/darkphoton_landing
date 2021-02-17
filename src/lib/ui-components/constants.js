@@ -315,3 +315,15 @@ export const resumeData = {
     }
   ]
 };
+
+
+export const educationData = [
+  {
+    type: "high school",
+    name: "A Phillip Randolph Campus HS",
+    description: "grades 7-12",
+    location: "Upper Westside, NYC",
+    website: "https://www.aprandolph.com/",
+
+  }
+]
