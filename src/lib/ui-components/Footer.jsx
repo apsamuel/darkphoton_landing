@@ -13,7 +13,7 @@ import * as Colors from "@material-ui/core/colors/";
 const useStyles = makeStyles({
   root: {
     borderRadius: "25px",
-    width: "100%",
+    maxWidth: "100vh",
     backgroundColor: Colors.purple[700].toString()
   }
 });

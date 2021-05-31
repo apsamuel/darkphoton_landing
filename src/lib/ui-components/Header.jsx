@@ -87,11 +87,15 @@ const useStyles = makeStyles((theme) => ({
     //width: "100%",
     //height: "65px",
     justifyContent: "center",
-    alignItems: "center",
+    //alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
     flex: 1,
-    borderRadius: "15px",
-    margin: "5px",
-    zIndex: `calc(${theme.zIndex.appBar} + 1)`
+    borderRadius: "25px",
+    //margin: "5px",
+    zIndex: `calc(${theme.zIndex.appBar} + 2)`,
+    minWidth: "100vh",
+    //padding: 5
   }
 }));
 
