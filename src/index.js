@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import {
   createMuiTheme,
   ThemeProvider,
-  responsiveFontSizes
+  responsiveFontSizes,
 } from "@material-ui/core/styles";
 import * as Colors from "@material-ui/core/colors/";
 const rootElement = document.getElementById("root");
@@ -17,53 +17,53 @@ let theme = createMuiTheme({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: Colors.purple[50].toString()
+    backgroundColor: Colors.purple[50].toString(),
   },
   pallete: {
     primary: Colors.purple[700].toString(),
-    secondary: Colors.grey[900].toString()
+    secondary: Colors.grey[900].toString(),
   },
   typography: {
     fontFamily: "Roboto",
     subtitle2: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     h1: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     h2: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     h3: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     h4: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     h5: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     h6: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     body1: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     body2: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     button: {
       fontFamily: "Roboto",
       fontSize: 12,
-      fontWeight: "bolder"
+      fontWeight: "bolder",
     },
     caption: {
-      fontFamily: "Roboto"
+      fontFamily: "Roboto",
     },
     overline: {
-      fontFamily: "Roboto"
-    }
-  }
+      fontFamily: "Roboto",
+    },
+  },
 });
 
 theme = responsiveFontSizes(theme);
