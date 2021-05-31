@@ -9,6 +9,7 @@ import Resume from "./lib/ui-components/Resume";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
   makeStyles,
+  useTheme,
   // createMuiTheme,
   // ThemeProvider,
   // getThemeProps,
