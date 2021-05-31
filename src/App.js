@@ -1,104 +1,103 @@
 import React from "react";
 import "./App.css";
 import * as Colors from "@material-ui/core/colors/";
-//import { Grid } from "@material-ui/core";
 import Header from "./lib/ui-components/Header";
 import Footer from "./lib/ui-components/Footer";
 import FeaturedContent from "./lib/ui-components/FeaturedContent";
 import Moments from "./lib/ui-components/Moments";
 import Resume from "./lib/ui-components/Resume";
-//import CardPlay from "./lib/ui-components/CardPlay";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/styles";
+import {
+  makeStyles,
+  // createMuiTheme,
+  // ThemeProvider,
+  // getThemeProps,
+} from "@material-ui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    //flexWrap: "wrap",
-    //justifyContent: "space-around",
-    //overflow: "hidden",
-    backgroundColor: "#212121"
-  },
-  body: {},
-  pageStyles: {
-    //backgroundColor: "black",
-    display: "flex",
-    //flex: 2,
-    flexDirection: "column",
-    minHeight: "100vh",
-    minWidth: "100vh",
-    //flexWrap: "wrap",
-    backgroundColor: "#212121"
-  },
-  containerStyles: {
-    backgroundColor: Colors.grey[900].toString(), 
-
-  },
-  containerHeaderStyles: {
-    backgroundColor: Colors.grey[900].toString(),
-    //padding: 1,
-    display: "flex",
-    flex: 1,
-    flexDirection: "row",
-    //flex: "auto",
-    //border: "1px solid black",
-    //position: "relative",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: "15px",
-    minWidth: "100vh",
-    minHeight: "10vh",
-    //maxHeight: "8vh"
-    //minWidth: "`calc(100vh - 240px)`" //
-    // height: "10vh",
-    // width: "100%"
-    //    height: "100vh",
-  },
-  containerContentStyles: {
-    padding: 0,
-    margin: 0,
-    display: "flex",
-    //flex: 3,
-    //flexGrow: 3,
-    //flexShrink: 3,
-    flexWrap: "nowrap",
-    flexDirection: "row",
-    //flexGrow: 3,
-    //flex: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: "85vh",
-    //maxHeight: "85vh",
-    // border: "5px solid black",
-    backgroundColor: Colors.grey[900].toString(),
-    position: "relative",
-    borderRadius: "15px",
-    minWidth: "100vh"
-
-    //    height: "100px",
-    //    width: "500px"
-  },
-  containerFooterStyles: {
-    backgroundColor: Colors.grey[900].toString(),
-    //padding: 1,
-    display: "flex",
-    flex: 3,
-    //flexGrow: 1,
-    //flexShrink: 1,
-    flexDirection: "column",
-    border: "1px solid black",
-    position: "relative",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: "15px",
-    minHeight: "10vh",
-    minWidth: "100vh"
-
-  },
-}));
-
-//console.log(theme.palette.background.paper)
+const useStyles = makeStyles((theme) => {
+  console.log(theme); // Here palette includes the new palette.
+  return {
+    // The top level container, should be like the page but basically empty
+    root: {
+      color: theme.palette.primary[400],
+      display: "flex",
+      flexDirection: "column",
+      flexWrap: "wrap",
+      flexFlow: "column wrap",
+      alignItems: "center",
+      justifyContent: "space-around",
+    },
+    // The page container ((page components are within this Div))
+    pageStyles: {
+      display: "flex",
+      flexDirection: "column",
+      flexWrap: "wrap",
+      flexFlow: "column wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      minHeight: "100vh",
+      minWidth: "100vw",
+      backgroundColor: "#9C2222",
+    },
+    // The header container
+    containerHeaderStyles: {
+      backgroundColor: Colors.grey[900].toString(),
+      display: "flex",
+      flex: 1,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: "15px",
+      minWidth: "100vw",
+      maxWidth: "100vw",
+      minHeight: "10vh",
+      maxHeight: "10vh",
+      //margin: "auto 0",
+      border: "1px solid black",
+      //offset: theme.mixins.toolbar,
+      margin: "5px",
+      //minWidth: "`calc(100vh - 240px)`" //
+    },
+    // The content container
+    containerContentStyles: {
+      padding: 1,
+      margin: "5px",
+      display: "flex",
+      border: "1px solid black",
+      flex: 3,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      alignContent: "center",
+      minHeight: "85vh",
+      backgroundColor: Colors.grey[900].toString(),
+      position: "relative",
+      borderRadius: "15px",
+      minWidth: "100vw",
+      maxWidth: "100vw",
+      offset: theme.mixins.toolbar,
+    },
+    // The footer container
+    containerFooterStyles: {
+      backgroundColor: Colors.grey[900].toString(),
+      display: "flex",
+      flex: 1,
+      flexDirection: "column",
+      border: "1px solid black",
+      position: "relative",
+      alignItems: "center",
+      alignContent: "center",
+      justifyContent: "center",
+      borderRadius: "15px",
+      minHeight: "10vh",
+      maxHeight: "10vh",
+      minWidth: "100vw",
+      maxWidth: "100vw",
+      margin: "5px",
+    },
+  };
+});
 
 function App() {
   const classes = useStyles();
@@ -137,50 +136,55 @@ function App() {
 
       {/* Primary Content is rendered within this nested container component in rows */}
 
-      {/*  Main Content is routed by Router within this nested container component item */}
-      <div className={classes.pageStyles}>
-      <div className={classes.containerHeaderStyles}>
-          <Header />
-        </div>
-        <div className={classes.containerContentStyles}>
-          <Switch>
-            <Route exact path="/">
-              <FeaturedContent />
-            </Route>
-          </Switch>
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-          </Switch>
-          <Switch>
-            <Route path="/services">
-              <Services />
-            </Route>
-          </Switch>
-          <Switch>
-            <Route path="/moments">
-              <Moments />
-            </Route>
-          </Switch>
-          <Switch>
-            <Route path="/resume">
-              <Resume />
-            </Route>
-          </Switch>
-          <Switch>
-            <Route path="/dabuttaz">
-              <DaButterz />
-            </Route>
-          </Switch>
-        </div>
+      <div className={classes.root}>
+        {/*  Main Content is routed by Router within this nested container component item */}
+        <div className={classes.pageStyles}>
+          <div className={classes.containerHeaderStyles}>
+            <Header />
+          </div>
+          <div
+            className={classes.containerContentStyles}
+            //classes={classes.offset}
+          >
+            <Switch>
+              <Route exact path="/">
+                <FeaturedContent />
+              </Route>
+            </Switch>
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+            </Switch>
+            <Switch>
+              <Route path="/services">
+                <Services />
+              </Route>
+            </Switch>
+            <Switch>
+              <Route path="/moments">
+                <Moments />
+              </Route>
+            </Switch>
+            <Switch>
+              <Route path="/resume">
+                <Resume />
+              </Route>
+            </Switch>
+            <Switch>
+              <Route path="/dabuttaz">
+                <DaButterz />
+              </Route>
+            </Switch>
+          </div>
 
-        {/* end Primary Content  */}
+          {/* end Primary Content  */}
 
-        {/* Footer Content is rendered within the main container item */}
+          {/* Footer Content is rendered within the main container item */}
 
-        <div className={classes.containerFooterStyles}>
-          <Footer />
+          <div className={classes.containerFooterStyles}>
+            <Footer />
+          </div>
         </div>
       </div>
     </Router>
