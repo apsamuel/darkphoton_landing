@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => {
       justifyContent: "space-between",
       minHeight: "100vh",
       minWidth: "100vw",
-      backgroundColor: "#9C2222",
+      backgroundColor: "#ffffff",
     },
     // The header container
     containerHeaderStyles: {

@@ -1,6 +1,6 @@
 //import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
@@ -16,7 +16,7 @@ import * as Colors from "@material-ui/core/colors/";
 import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => {
-  console.log(theme); // Here palette includes the new palette.
+  console.log("theme: "+theme); // Here palette includes the new palette.
   return {
   spacing: {
     container: 2
@@ -83,12 +83,10 @@ const useStyles = makeStyles(theme => {
     order: 1,
     justifyContent: "center",
     alignItems: "center",
+    alignContent: "center",
+    position: "relative",
     overflow: "hidden",
-    //padding: 5,
-    flex: 1,
-    //width: 600,
-    //height: 400,
-    //maxWidth: 1200,
+    flexDirection: "column",
     boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.9)",
     backgroundColor: Colors.grey[900].toString(),
     borderRadius: "25px"
@@ -100,7 +98,8 @@ const useStyles = makeStyles(theme => {
 
   typographyStyles: {
     flex: 1,
-    fontWeight: 5
+    fontWeight: 10,
+    //fontFamily: ""
   },
   };
 });
@@ -191,6 +190,8 @@ const FeaturedContent = () => {
   //console.log(cardList[0].testing);
   //console.log(theme)
   const classes = useStyles();
+  //const theme = useTheme();
+  //console.log("theme: "+ theme)
   //create gridItems (cards) from constants data
   const gridItems = cardList.map((item, index) => (
     <Grid item className={classes.gridItemStyles}  key={index}>
