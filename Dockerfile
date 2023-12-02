@@ -10,7 +10,7 @@ RUN yarn install
 RUN yarn build
 
 # stage: 2 — the production environment
-FROM nginx:alpine
+FROM nginx:1.25.3-alpine3.18
 
 #RUN mkdir -p /usr/share/nginx/html/
 WORKDIR /usr/share/nginx/html 
